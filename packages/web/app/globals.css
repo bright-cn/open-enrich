@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+/* ── Open Enrich — Premium Design System ── */
+/* High-end dark interface with depth, grain, and presence */
+
+@theme inline {
+  /* ── Background Palette (warm-tinted darks) ── */
+  --color-bg-deepest: #050710;
+  --color-bg-deep: #0a1628;
+  --color-bg-base: #0b1022;
+  --color-bg-elevated: #0f152e;
+  --color-bg-surface: #131b38;
+
+  /* ── Accent Colors (refined, desaturated) ── */
+  --color-bd-accent: #4B8BFF;
+  --color-bd-accent-hover: #3A6FE0;
+  --color-bd-accent-light: #22D3EE;
+  --color-bd-accent-purple: #A5A0F6;
+  --color-bd-success: #34D399;
+  --color-bd-warning: #FBBF24;
+  --color-bd-error: #F87171;
+  --color-bd-info: #60A5FA;
+
+  /* ── Typography ── */
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* ── Tinted Shadows (navy-tinted, not pure black) ── */
+  --shadow-card: 0 4px 12px -2px rgba(10, 22, 40, 0.6), 0 2px 4px -1px rgba(10, 22, 40, 0.4);
+  --shadow-lg: 0 12px 24px -4px rgba(10, 22, 40, 0.7), 0 4px 8px -2px rgba(10, 22, 40, 0.4);
+  --shadow-xl: 0 24px 48px -8px rgba(10, 22, 40, 0.8), 0 8px 16px -4px rgba(10, 22, 40, 0.5);
+  --shadow-glow-primary: 0 0 24px rgba(75, 139, 255, 0.2), 0 0 48px rgba(75, 139, 255, 0.08);
+  --shadow-glow-success: 0 0 24px rgba(52, 211, 153, 0.2);
+
+  /* ── Animations ── */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glow: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(75, 139, 255, 0.15); }
+  100% { box-shadow: 0 0 40px rgba(75, 139, 255, 0.3); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ── Base Styles ── */
+:root {
+  color-scheme: dark;
+
+  /* Surface colors (with transparency) */
+  --surface-card: rgba(11, 16, 34, 0.65);
+  --surface-card-hover: rgba(15, 21, 46, 0.85);
+  --surface-modal: rgba(11, 16, 34, 0.97);
+  --surface-input: rgba(11, 16, 34, 0.5);
+  --surface-glass: rgba(255, 255, 255, 0.025);
+
+  /* Border colors (warm white tint) */
+  --border-subtle: rgba(165, 180, 220, 0.06);
+  --border-default: rgba(165, 180, 220, 0.1);
+  --border-strong: rgba(165, 180, 220, 0.18);
+  --border-accent: rgba(75, 139, 255, 0.25);
+  --border-focus: rgba(75, 139, 255, 0.5);
+
+  /* Text colors */
+  --text-primary: #f0f2f8;
+  --text-secondary: rgba(240, 242, 248, 0.65);
+  --text-tertiary: rgba(240, 242, 248, 0.45);
+  --text-disabled: rgba(240, 242, 248, 0.25);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #A5A0F6 0%, #4B8BFF 50%, #22D3EE 100%);
+  --gradient-ambient: radial-gradient(ellipse at 50% -10%, rgba(75, 139, 255, 0.07) 0%, transparent 55%);
+  --gradient-shine: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+  --gradient-glow: radial-gradient(circle at center, rgba(75, 139, 255, 0.12) 0%, transparent 60%);
+}
+
+body {
+  background-color: var(--color-bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Noise / Grain Overlay ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── Background Pattern (line grid) ── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(100, 150, 220, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 150, 220, 0.09) 1px, transparent 1px);
+  background-size: 140px 140px;
+}
+
+/* ── Utility Classes ── */
+.surface-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+}
+
+.surface-card:hover {
+  background: var(--surface-card-hover);
+  border-color: var(--border-strong);
+}
+
+.surface-input {
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  transition: all 200ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.surface-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(75, 139, 255, 0.1), 0 0 20px rgba(75, 139, 255, 0.06);
+}
+
+.surface-modal {
+  background: var(--surface-modal);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-glow-primary);
+  transition: all 250ms cubic-bezier(0.32, 0.72, 0, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 32px rgba(75, 139, 255, 0.35), 0 0 64px rgba(75, 139, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  transition: all 250ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--surface-glass);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ── Text Utilities ── */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-disabled { color: var(--text-disabled); }
+
+/* ── Status Log Colors ── */
+.log-search { color: var(--color-bd-accent-light); }
+.log-scrape { color: var(--color-bd-accent); }
+.log-extract { color: var(--color-bd-accent-purple); }
+.log-success { color: var(--color-bd-success); }
+.log-warning { color: var(--color-bd-warning); }
+.log-error { color: var(--color-bd-error); }
+
+/* ── Ambient Background Glow ── */
+.bg-ambient {
+  position: relative;
+}
+
+.bg-ambient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-ambient);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Spotlight hover border effect ── */
+.spotlight-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(75, 139, 255, 0.15),
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+  opacity: 0;
+}
+
+.spotlight-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(165, 180, 220, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(165, 180, 220, 0.2);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(75, 139, 255, 0.3);
+  color: #f0f2f8;
+}
+
+/* ── Smooth Scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 2px solid rgba(75, 139, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* ── Tabular nums for data ── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

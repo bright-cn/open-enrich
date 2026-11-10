@@ -1,0 +1,48 @@
+name: Release
+
+# Publish whenever a version tag is pushed, e.g. v0.1.1
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write   # REQUIRED: lets the job mint an OIDC token for npm
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        # Version is read from the "packageManager" field in package.json
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22          # must be >= 22.14.0
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      # Trusted publishing needs npm >= 11.5.1; Node 22 ships older, so upgrade.
+      - name: Upgrade npm (OIDC support)
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI and its dependencies (core)
+        # The trailing "..." also builds @brightdata/enrich-core first, in
+        # dependency order, so tsup can resolve core's dist/ when bundling.
+        run: pnpm --filter "@brightdata/enrich..." build
+
+      - name: Publish to npm via OIDC
+        working-directory: packages/cli
+        run: npm publish
+        # No NODE_AUTH_TOKEN, no secrets. OIDC is auto-detected.
+        # --access public and --provenance come from publishConfig in package.json.

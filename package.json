@@ -1,0 +1,16 @@
+{
+  "name": "open-enrich-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' build",
+    "dev:web": "pnpm --filter open-enrich dev",
+    "dev:cli": "pnpm --filter @brightdata/enrich build --watch",
+    "lint": "pnpm -r --filter './packages/*' lint",
+    "typecheck": "pnpm -r --filter './packages/*' typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

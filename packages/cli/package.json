@@ -1,0 +1,57 @@
+{
+  "name": "@brightdata/enrich",
+  "version": "0.1.1",
+  "description": "Enrich CSVs with company and person data using Bright Data + LLM agents",
+  "license": "MIT",
+  "author": "Bright Data",
+  "homepage": "https://github.com/brightdata/open-enrich#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brightdata/open-enrich.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/brightdata/open-enrich/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "enrich": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "enrichment",
+    "csv",
+    "bright-data",
+    "ai",
+    "agents",
+    "lead-gen"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/bin.js"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "picocolors": "^1.0.0",
+    "env-paths": "^3.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@brightdata/enrich-core": "workspace:*",
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

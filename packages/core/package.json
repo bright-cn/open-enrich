@@ -1,0 +1,52 @@
+{
+  "name": "@brightdata/enrich-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./presets": {
+      "types": "./dist/presets.d.ts",
+      "import": "./dist/presets.js",
+      "require": "./dist/presets.cjs"
+    },
+    "./csv/format": {
+      "types": "./dist/csv/format.d.ts",
+      "import": "./dist/csv/format.js",
+      "require": "./dist/csv/format.cjs"
+    },
+    "./csv/crm-mappings": {
+      "types": "./dist/csv/crm-mappings.d.ts",
+      "import": "./dist/csv/crm-mappings.js",
+      "require": "./dist/csv/crm-mappings.cjs"
+    }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@brightdata/sdk": "^1.0.0",
+    "@langchain/core": "^1.1.39",
+    "@langchain/langgraph": "^1.2.8",
+    "@langchain/openai": "^1.4.3",
+    "deepagents": "^1.9.0",
+    "langchain": "^1.4.0",
+    "papaparse": "^5.5.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.5.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
